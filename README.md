@@ -37,6 +37,10 @@ Este projeto tem como objetivo gerenciar os **aluguéis de uma locadora de filme
 ## ⚙️ Observações Importantes
 
 - O sistema **não possui interface gráfica**: a interação é feita diretamente via console.
-- A fase 2 do projeto introduziu dois novos relatórios:
+- A fase 2 do projeto introduziu dois novos relatórios para aumentar o escopo do projeto conforme solicitado pela professora na correção da fase 1 do projeto. Os novos relatórios são:
   - `Genre Performance Report`
   - `Customer Activity Report`
+- Além disso, também foi ajustado o diagrama de entidade relacionamento da fase 1 conforme solicitado.:
+  
+ <img width="1081" height="721" alt="image" src="https://github.com/user-attachments/assets/c8d091fc-9962-4d75-9bf7-c09d9496c793" />
+
