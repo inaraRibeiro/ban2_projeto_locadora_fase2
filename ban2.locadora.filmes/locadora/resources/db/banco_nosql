@@ -1,0 +1,314 @@
+// 1. Create Collections and Insert Initial Data
+
+// Users Collection
+db.users.insertMany([
+    {
+        _id: 1,
+        cpf: "12332145602",
+        first_name: "João",
+        last_name: "Silva",
+        email: "joão.silva@gmail.com",
+        phone: "47 91234-4321",
+        address: null,
+        created_at: new Date()
+    },
+    {
+        _id: 2,
+        cpf: "12332145603",
+        first_name: "Maria",
+        last_name: "Joaquina",
+        email: "maria.joaquina@hotmail.com",
+        phone: "47 94321-1234",
+        address: null,
+        created_at: new Date()
+    },
+    {
+        _id: 3,
+        cpf: "12332145604",
+        first_name: "Inara",
+        last_name: "Ribeiro",
+        email: "inara.bussiness@hotmail.com",
+        phone: "47 94321-4321",
+        address: null,
+        created_at: new Date()
+    }
+]);
+
+// Genres Collection
+db.genres.insertMany([
+    {
+        _id: 1,
+        name: "Drama",
+        rental_fee: 7.00
+    },
+    {
+        _id: 2,
+        name: "Crime",
+        rental_fee: 7.00
+    },
+    {
+        _id: 3,
+        name: "Terror",
+        rental_fee: 8.00
+    },
+    {
+        _id: 4,
+        name: "Acao",
+        rental_fee: 7.50
+    },
+    {
+        _id: 5,
+        name: "Comedia",
+        rental_fee: 7.00
+    },
+    {
+        _id: 6,
+        name: "Sci-fi",
+        rental_fee: 7.00
+    },
+    {
+        _id: 7,
+        name: "Infantil",
+        rental_fee: 6.50
+    }
+]);
+
+// Movies Collection
+db.movies.insertMany([
+    {
+        _id: 1,
+        title: "Um Sonho de Liberdade",
+        release_year: 1994,
+        genre_id: 1,
+        genre: {
+            name: "Drama",
+            rental_fee: 7.00
+        },
+        director: "Frank Darabont",
+        duration_minutes: 142,
+        rating: "18",
+        total_copies: 1,
+        available_copies: 0,
+        date_added: new Date()
+    },
+    {
+        _id: 2,
+        title: "O Poderoso Chefao",
+        release_year: 1972,
+        genre_id: 2,
+        genre: {
+            name: "Crime",
+            rental_fee: 7.00
+        },
+        director: "Francis Ford Coppola",
+        duration_minutes: 175,
+        rating: "18",
+        total_copies: 1,
+        available_copies: 0,
+        date_added: new Date()
+    },
+    {
+        _id: 3,
+        title: "Pulp Fiction",
+        release_year: 1994,
+        genre_id: 2,
+        genre: {
+            name: "Crime",
+            rental_fee: 7.00
+        },
+        director: "Quentin Tarantino",
+        duration_minutes: 154,
+        rating: "18",
+        total_copies: 1,
+        available_copies: 1,
+        date_added: new Date()
+    },
+    {
+        _id: 4,
+        title: "Batman: O Cavaleiro das Trevas",
+        release_year: 2008,
+        genre_id: 4,
+        genre: {
+            name: "Acao",
+            rental_fee: 7.50
+        },
+        director: "Christopher Nolan",
+        duration_minutes: 152,
+        rating: "13",
+        total_copies: 1,
+        available_copies: 1,
+        date_added: new Date()
+    },
+    {
+        _id: 5,
+        title: "A Origem",
+        release_year: 2010,
+        genre_id: 6,
+        genre: {
+            name: "Sci-fi",
+            rental_fee: 7.00
+        },
+        director: "Christopher Nolan",
+        duration_minutes: 148,
+        rating: "13",
+        total_copies: 1,
+        available_copies: 1,
+        date_added: new Date()
+    },
+    {
+        _id: 6,
+        title: "Procurando Nemo",
+        release_year: 2003,
+        genre_id: 7,
+        genre: {
+            name: "Infantil",
+            rental_fee: 6.50
+        },
+        director: "Andrew Stanton",
+        duration_minutes: 100,
+        rating: "L",
+        total_copies: 1,
+        available_copies: 1,
+        date_added: new Date()
+    }
+]);
+
+// Rentals Collection
+db.rentals.insertMany([
+    {
+        _id: 1,
+        user_id: 1,
+        user: {
+            name: "João Silva",
+            email: "joão.silva@gmail.com",
+            cpf: "12332145602"
+        },
+        movie_id: 2,
+        movie: {
+            title: "O Poderoso Chefao",
+            genre: "Crime"
+        },
+        rental_date: new Date("2025-04-10T19:54:06.308Z"),
+        due_date: new Date("2025-04-15T19:54:06.308Z"),
+        return_date: null,
+        rental_fee: 6.50,
+        status: "ACTIVE"
+    },
+    {
+        _id: 2,
+        user_id: 1,
+        user: {
+            name: "João Silva",
+            email: "joão.silva@gmail.com",
+            cpf: "12332145602"
+        },
+        movie_id: 1,
+        movie: {
+            title: "Um Sonho de Liberdade",
+            genre: "Drama"
+        },
+        rental_date: new Date("2025-04-10T19:54:06.308Z"),
+        due_date: new Date("2025-04-15T19:54:06.308Z"),
+        return_date: null,
+        rental_fee: 6.50,
+        status: "ACTIVE"
+    }
+]);
+
+// 2. Create Indexes for Performance and Constraints
+
+// Users Collection Indexes
+db.users.createIndex({ "cpf": 1 }, { unique: true });
+db.users.createIndex({ "email": 1 }, { unique: true });
+
+// Genres Collection Indexes
+db.genres.createIndex({ "name": 1 });
+
+// Movies Collection Indexes
+db.movies.createIndex({ "title": 1 });
+db.movies.createIndex({ "genre_id": 1 });
+db.movies.createIndex({ "release_year": 1 });
+
+// Rentals Collection Indexes
+db.rentals.createIndex({ "user_id": 1 });
+db.rentals.createIndex({ "movie_id": 1 });
+db.rentals.createIndex({ "status": 1 });
+db.rentals.createIndex({ "rental_date": 1 });
+db.rentals.createIndex({ "due_date": 1 });
+
+// 3. Set up counters for auto-incrementing IDs (for new records)
+db.counters.insertMany([
+    { _id: "users", sequence_value: 3 },
+    { _id: "genres", sequence_value: 7 },
+    { _id: "movies", sequence_value: 6 },
+    { _id: "rentals", sequence_value: 2 }
+]);
+
+// Function to get next sequence value
+function getNextSequence(name) {
+    var ret = db.counters.findAndModify({
+        query: { _id: name },
+        update: { $inc: { sequence_value: 1 } },
+        new: true
+    });
+    return ret.sequence_value;
+}
+
+// Add a new user
+db.users.insertOne({
+    _id: getNextSequence("users"),
+    cpf: "12332145605",
+    first_name: "Carlos",
+    last_name: "Santos",
+    email: "carlos.santos@gmail.com",
+    phone: "47 95555-5555",
+    address: null,
+    created_at: new Date()
+});
+
+// Add a new genre
+db.genres.insertOne({
+    _id: getNextSequence("genres"),
+    name: "Romance",
+    rental_fee: 6.00
+});
+
+
+// Add a new movie
+db.movies.insertOne({
+    _id: getNextSequence("movies"),
+    title: "Matrix",
+    release_year: 1999,
+    genre_id: 6,
+    genre: {
+        name: "Sci-fi",
+        rental_fee: 7.00
+    },
+    director: "Lana Wachowski",
+    duration_minutes: 136,
+    rating: "16",
+    total_copies: 1,
+    available_copies: 1,
+    date_added: new Date()
+});
+
+// Add a new rental
+db.rentals.insertOne({
+    _id: getNextSequence("rentals"),
+    user_id: 2,
+    user: {
+        name: "Maria Joaquina",
+        email: "maria.joaquina@hotmail.com",
+        cpf: "12332145603"
+    },
+    movie_id: 3,
+    movie: {
+        title: "Pulp Fiction",
+        genre: "Crime"
+    },
+    rental_date: new Date(),
+    due_date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
+    return_date: null,
+    rental_fee: 7.00,
+    status: "ACTIVE"
+});
